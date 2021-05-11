@@ -1,0 +1,210 @@
+﻿<!doctype html>
+<html>
+<head>
+    <title>Get Cookies</title>
+    <style>
+        body {
+            overflow: hidden;
+            margin: 0px;
+            background: white;color: #303030;
+        }
+        .btn {
+            text-align: center;
+            font-family: sans-serif;
+            margin-top: 1px;
+            background: #64c306;
+            font-size: 12px;
+            color: #ffffff;
+            background-color: #64c306;
+            border-color: #64c306;
+            border: 0;
+            padding: 5px 8px;
+            border-radius: 3px;
+            cursor: pointer;
+            text-transform: uppercase;
+            float: right;
+        }
+        #start_plus:hover {
+            background: #74C523;
+        }
+        #Stop_plus:hover {
+            background: #E46A56;
+        }
+        .btn_red {
+        background: #3954a4;
+        color: white;
+        }
+        .btn_red:hover {
+            background-color:#3954a4d5;
+        }
+        .btn_red:active {
+            position:relative;
+            top:1px;
+        }
+
+        .btnTools {
+            width: 250px;
+            -moz-box-shadow:inset 0px 39px 0px -24px #e67a73;
+            -webkit-box-shadow:inset 0px 39px 0px -24px #e67a73;
+            box-shadow:inset 0px 39px 0px -24px #e67a73;
+            background-color:#e4685d;
+            -moz-border-radius:4px;
+            -webkit-border-radius:4px;
+            border-radius:4px;
+            border:1px solid #ffffff;
+            display:inline-block;
+            cursor:pointer;
+            color:#ffffff;
+            font-family:Arial;
+            font-size:15px;
+            padding:6px 15px;
+            text-decoration:none;
+            text-shadow:0px 1px 0px #b23e35;
+        }
+        .btnTools:hover {
+            background-color:#e67a73;
+        }
+        .btnTools:active {
+            position:relative;
+            top:1px;
+        }
+
+
+        .row {
+            width: 100%;
+            float: left;
+            margin-bottom: 10px;
+        }
+        label {
+            font-size: 13px;
+            font-family: arial;
+            line-height: 1.5em;
+        }
+        .main {
+            width: 250px;
+            padding: 10px;
+        }
+        h4 {
+            font-size: 14px;
+            font-family: arial;
+            color: #DB4437;
+            border-bottom: solid 1px gainsboro;
+            padding-bottom: 6px;
+            margin: 0px 0px 10px 0;
+        }
+        .footer {
+            font-size: 12px;
+            float: left;
+            width: 100%;
+            padding: 0px 10px 2px;
+            text-decoration: none;
+            background-color: #efefef;
+            border-top: solid 1px gainsboro;
+        }
+        .footer a {
+            margin-right: 10px;
+            text-decoration: none;
+            color: #999;
+        }
+        .footer a:hover {
+            color: #494949;
+        }
+        #list_cookie { max-height: 310px; overflow: auto;  margin-top: 1px; }
+            #list_cookie .cc {
+                font-size: 11px;
+                font-weight: bold;
+                background: #84aace;
+                padding: 5px;
+                position: relative;
+                cursor: pointer;
+                -webkit-border-radius: 6px;
+                -moz-border-radius: 6px;
+                border-radius: 6px;
+                margin-bottom: 4px;
+                color: white;
+            }
+        #list_cookie .cc:hover {
+            background: #098cce;
+        }
+		
+        #list_cookie .cc .delete {
+                background: #182203;
+                color: white;
+                width: 11px;
+                height: 14px;
+                display: none;
+                float: right;
+                text-align: center;
+                font-size: 10px;
+                cursor: pointer;
+                position: absolute;
+                right: 0;
+                top: 0;
+        }
+		#list_cookie .cc:hover .delete{
+           display: inline-block;
+        }
+        #list_cookie .cc .delete:hover {
+            background: #33e7d8;
+        }
+		#btncookielogout{float:right;}
+		.header{    
+			float: left;
+			width: 100%; 
+		}
+        textarea {
+            resize: none;
+        }
+    </style>
+    
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="popup.js">
+	</script>
+</head>
+<body>
+    <div class="main">
+        <div class="row">
+			 <label style="display:block;margin-bottom: 3px;" id="DivFbIdCurrent">
+				<input hidden type='text' id='CurrentFbId' value='' style="width: 120px;padding: 2px 2px 2px 5px;"/>
+			</label>
+            <label style="display:block;margin-bottom: 3px;">Cookie :
+				<label id='UrlCookieCurrent' style="color: #f16625;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;max-width: 148px;display: inline-block;vertical-align: top;font-weight: bold;"></label>
+			</label>
+            <textarea id="cookieResult" rows="5" style="width:100%;word-break: break-all;"></textarea>
+			
+            <button id="btnImportCookie" type="button" style="float:left;margin-right: 3px;" class="btn">Set Cookie</button>
+            <button id="btnGetQRCode" type="button" style="float:left;" class="btn">QRCODE</button>
+			<button id="btnGetAccessToken"  type="button" style="float:right; background-color: #2e2e2e;" class="btn">Get Token</button>
+            <img id="QRCode" style="width:100%;float:left;margin-bottom:5px;display:none;"/>
+
+            <label style="display:block;margin-bottom: 3px;">Tools :</label>
+			<button id="btnAutoAddFriendFb"  type="button"  class="btn btnTools">Auto Add Friend</button>
+			<button id="btnUnfriendAllFriends"  type="button"  class="btn btnTools">Unfriend All Friends</button>
+            
+		</div>
+		
+		<div class="row">
+            <button id="btnTools"  type="button" style="float:left;background-color: #e64b32;" class="btn">Save Cookie</button>
+            <button id="btncookielogout" type="button" style="float: right;" class="btn btn_red">Login new Fb</button>
+            <label style="margin-top: 2px;display: inline-block;margin-bottom: 5px;">Select cookies</label>
+			<div class="row" id="list_cookie">
+
+            </div>
+        </div>
+        <img src="../image/download.png" style="width: 24px;margin-right: 5px;vertical-align: bottom;"></a>
+		<a title="Download all cookie file" href="javascript:void(0)" id='btnDownloadCookie' style="color: #206eab;">
+            Download all cookie file
+        </a>
+    </div>
+    <div class="footer">
+        <div class=''>
+            <h3 style="line-height: 24px;padding: 5px 5px 5px 10px;color:#9e8d52;">
+                <a href="http://yoyaldev.github.io" target="blank">
+                    <img src="../image/icon.png" style="width: 24px;margin-right: 5px;vertical-align: bottom;"></a>
+                Get Cookie Ngọc Diệp MO
+            </h3>
+        </div>
+    </a>
+    </div>
+</body>
+</html>
